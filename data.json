@@ -1,6 +1,7 @@
 [
     {
         "BookId": "001",
+        "Img": "book_1.jpeg",
         "BookName": "The Creature Choir",
         "Publisher": "HarperCollins Publishers",
         "Category": "Storybook",
@@ -9,10 +10,11 @@
         "Description": "Sing your heart out with a whole choir of characters, in the showstopping new picture book from number one bestselling author David Walliams, illustrated by the artistic genius, Tony Ross!",
         "Price": "117",
         "Published": "United Kingdom, 12 December 2019",
-        "New Arrival": "Yes"
+        "NewArrival": "Yes"
     },
     {
         "BookId": "002",
+        "Img": "book_2.jpeg",
         "BookName": "Olive, Again",
         "Publisher": "Penguin Books Ltd",
         "Category": "Contemporary Fiction",
@@ -21,10 +23,11 @@
         "Description": "An extraordinary new novel by the Pulitzer Prize-winning, Number One New York Times bestselling author of Olive Kitteridge and My Name is Lucy Barton...",
         "Price": "122",
         "Published": "United Kingdom, 31 October 2019",
-        "New Arrival": "No"
+        "NewArrival": "No"
     },
     {
         "BookId": "003",
+        "Img": "book_3.jpeg",
         "BookName": "Have You Filled A Bucket Today? : A Guide to Daily Happiness for Kids",
         "Publisher": "Bucket Fillosophy",
         "Category": "Picture Book",
@@ -33,10 +36,11 @@
         "Description": "Children are not the only ones that need to learn how to be truly happy. It's all in the bucket, that invisible bucket that follows you everywhere... teaches young readers valuable lessons about giving, sharing, and caring...",
         "Price": "73",
         "Published": "USA, 1 October 2015",
-        "New Arrival": "No"
+        "NewArrival": "No"
     },
     {
         "BookId": "004",
+        "Img": "book_4.jpeg",
         "BookName": "Dog Man: World Book Day 2020 (50CP)",
         "Publisher": "Scholastic",
         "Category": "Storybook",
@@ -45,10 +49,11 @@
         "Description": "A BRILLIANT new DOG MAN book for World Book Day 2020 packedwith\r\nthree humorous stories.\r\n\r\nDav Pilkey's wildly popular\r\nDOG MAN series appeals to readers of all ages and explores universally\r\npositive themes...",
         "Price": "50",
         "Published": "United Kingdom, 27 Feb 2020",
-        "New Arrival": "No"
+        "NewArrival": "No"
     },
     {
         "BookId": "005",
+        "Img": "book_5.jpeg",
         "BookName": "Brave Irene: A Picture Book",
         "Publisher": "Square Fish",
         "Category": "Picture Book",
@@ -57,10 +62,11 @@
         "Description": "Brave Irene is Irene Bobbin, the dressmaker's daughter. Her mother, Mrs. Bobbin, isn't feeling so well and can't possibly deliver the beautiful ball gown she's made for the duchess to wear that very evening. ",
         "Price": "87",
         "Published": "USA, 1 January 1996",
-        "New Arrival": "No"
+        "NewArrival": "No"
     },
     {
         "BookId": "006",
+        "Img": "book_6.jpeg",
         "BookName": "Stanley Elwin & Alisdair Gray J15\/2",
         "Publisher": "Dalkey Archive Press",
         "Category": "Contemporary Fiction",
@@ -69,10 +75,11 @@
         "Description": "Arthur M. Saltzman, Stanley Elkin: An Introduction\/Peter J. Bailey, 'A Hat Where There Never Was a Hat': Stanley Elkin's Fifteenth Interview\/Stanley Elkin, Words and Music\/William Gass, Stanley Elkin: An Anecdote\/Jerome Charyn...",
         "Price": "139",
         "Published": "United States, 8 January 1995",
-        "New Arrival": "No"
+        "NewArrival": "No"
     },
     {
         "BookId": "007",
+        "Img": "book_7.jpeg",
         "BookName": "The Rule of the Land",
         "Publisher": "Faber & Faber; Main edition ",
         "Category": "History",
@@ -81,10 +88,11 @@
         "Description": "In the wake of the EU referendum, the United Kingdom's border with Ireland has gained greater significance: it is set to become the frontier with the European Union. Over the past year, Garrett Carr has travelled this border...",
         "Price": "130",
         "Published": "United Kingdom, 1 May 2017",
-        "New Arrival": "No"
+        "NewArrival": "No"
     },
     {
         "BookId": "008",
+        "Img": "book_8.jpeg",
         "BookName": "The Story of the Holy Land",
         "Publisher": "Lion Books",
         "Category": "History",
@@ -93,10 +101,11 @@
         "Description": "This is a highly illustrated, visually led guide through the story of the Holy Land, from Bible times to the present day. The Holy Land frequently features in today's headlines as a much fought-for territory. ",
         "Price": "199",
         "Published": "United Kingdom, 22 June 2018",
-        "New Arrival": "No"
+        "NewArrival": "No"
     },
     {
         "BookId": "009",
+        "Img": "book_9.jpeg",
         "BookName": "Doctor Who",
         "Publisher": "BBC Books",
         "Category": "Storybook",
@@ -105,10 +114,11 @@
         "Description": "In this exciting collection you'll find all-new stories spinning off from some of your favourite Doctor Who moments across the history of the series. Learn what happened next, what went on before...",
         "Price": "149",
         "Published": "United Kingdom, 24 October 2019",
-        "New Arrival": "No"
+        "NewArrival": "No"
     },
     {
         "BookId": "010",
+        "Img": "book_10.jpeg",
         "BookName": "Festivals of Love",
         "Publisher": "Createspace Independent Publishing Platform",
         "Category": "Contemporary Fiction",
@@ -117,10 +127,11 @@
         "Description": "Minnesota: A state blessed with 10,000 lakes, four beautiful seasons, and countless romantics looking for love in all the right places! What better place to find a perfect happily-ever-after than one of Minnesota's uniquely fun...",
         "Price": "131",
         "Published": "United States, 1 May 2016",
-        "New Arrival": "No"
+        "NewArrival": "No"
     },
     {
         "BookId": "011",
+        "Img": "book_11.jpeg",
         "BookName": "The Jungle Book",
         "Publisher": "Palazzo Editions Ltd",
         "Category": "Picture Book",
@@ -129,10 +140,11 @@
         "Description": "Originally published as part of Kipling's famous The Jungle Book, the story of Rikki Tikki Tavi, the little mongoose rescued by a family when he was half-drowned in a storm, has been an enduring favourite with young and old for more than half a century.",
         "Price": "80",
         "Published": "United Kingdom, 1 September 2018",
-        "New Arrival": "No"
+        "NewArrival": "No"
     },
     {
         "BookId": "012",
+        "Img": "book_12.jpeg",
         "BookName": "Sapiens",
         "Publisher": "Vintage Publishing",
         "Category": "History",
@@ -141,6 +153,6 @@
         "Description": "THE MILLION COPY BESTSELLER Fire gave us power. Farming made us hungry for more. Money gave us purpose. Science made us deadly. This is the thrilling account of our extraordinary history - from insignificant apes to rulers of the world.",
         "Price": "103",
         "Published": "UK, 29 April 2015",
-        "New Arrival": "No"
+        "NewArrival": "No"
     }
 ]

@@ -3,7 +3,7 @@ const Schema = mongoose.Schema
 
 const bookSchema = new Schema({
     BookId: {
-        type: Schema.Types.ObjectId,
+        type: String,
         required: true
     },
     BookName: {
@@ -38,10 +38,11 @@ const bookSchema = new Schema({
         type: String,
         required: true
     },
-    Arrival: {
+    NewArrival: {
         type: String,
         required: true
-    }
+    },
+    Img: String
 })
 
 
