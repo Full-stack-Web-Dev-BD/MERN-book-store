@@ -16,7 +16,6 @@ const CreatePost = () => {
         let obj={title,summary,author}
         Axios.post('http://localhost:5000/create-post',obj)
         .then(res=>{
-
             console.log(res.data)
             window.location.href='/home'
         })

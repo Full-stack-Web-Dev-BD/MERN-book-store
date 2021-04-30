@@ -22,6 +22,7 @@ import AuthButton from './AuthButton';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import BookCard from './BookCard';
 import Axios from 'axios';
+import BookDetailsCard from './BookDetailsCard';
 const drawerWidth = 240;
 
 
@@ -65,7 +66,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function Dashboard(props) {
+function DetailsPage(props) {
     const { window } = props;
     const classes = useStyles();
     const theme = useTheme();
@@ -90,7 +91,7 @@ function Dashboard(props) {
         <div>
             <div className={classes.toolbar} style={{ background: '#3f51b5' }} >
                 <div style={{ color: 'white', paddingTop: '15px' }}>
-                    <h3 className="text-center" >Book Store</h3>
+                    <h5 className="text-center" >Book Store</h5>
                 </div>
             </div>
             <Divider />
@@ -179,23 +180,13 @@ function Dashboard(props) {
             </nav>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <div className="row">
-                    {
-                        allBook.map(el => {
-                            return (
-                                <div className="col-xs-12 col-sm-6  col-md-4 mb-5">
-                                    <BookCard book={el} />
-                                </div>
-                            )
-                        })
-                    }
-                </div>
+                <BookDetailsCard />
             </main>
         </div>
     );
 }
 
-Dashboard.propTypes = {
+DetailsPage.propTypes = {
     /**
      * Injected by the documentation to work in an iframe.
      * You won't need it on your project.
@@ -203,4 +194,4 @@ Dashboard.propTypes = {
     window: PropTypes.func,
 };
 
-export default Dashboard;
+export default DetailsPage;
