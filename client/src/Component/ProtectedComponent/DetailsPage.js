@@ -22,8 +22,13 @@ import AuthButton from './AuthButton';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import BookCard from './BookCard';
 import Axios from 'axios';
-import BookDetailsCard from './BookDetailsCard';
+
+// Page name  Dashboard/Home
+
+
 const drawerWidth = 240;
+
+
 
 
 
@@ -66,32 +71,56 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function DetailsPage(props) {
+function Dashboard(props) {
     const { window } = props;
     const classes = useStyles();
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [allBook, setAllBook] = useState([])
+    const [keyword, setKeyword] = useState('')
+    const [textTitle, setTextTitle] = useState('Home')
 
+
+    const serachByCategory = (catText) => {
+        Axios.post(':5000/searchcategory', { category: catText })
+            .then(res => {
+                setAllBook(res.data)
+                setTextTitle(`Search Result for " ${catText} "`)
+
+            })
+    }
 
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
+    const sort = () => {
+        const sorted = allBook.sort((a, b) => parseFloat(b.Price) - parseFloat(a.Price));
+        setAllBook(sorted)
+        setTextTitle(`Sorted By Price `)
+    }
     useEffect(() => {
-        Axios.get('http://localhost:5000/getallbook')
+        // const hr=qs.parse(window.location.href)
+
+        // Axios.get(':5000/getsingle/')
+        //     .then(res => {
+        //         console.log(res.data)
+        //     })
+    }, [])
+    const search = (e) => {
+        e.preventDefault()
+        Axios.post(':5000/search', { text: keyword })
             .then(res => {
-                console.log('all data ', res.data)
+                setTextTitle(`Search Result for " ${keyword} "`)
                 setAllBook(res.data)
             })
-    }, [])
-
+    }
     // Sidebar
     const drawer = (
         <div>
             <div className={classes.toolbar} style={{ background: '#3f51b5' }} >
                 <div style={{ color: 'white', paddingTop: '15px' }}>
-                    <h5 className="text-center" >Book Store</h5>
+                    <h3 className="text-center" >Book Store</h3>
                 </div>
             </div>
             <Divider />
@@ -103,12 +132,23 @@ function DetailsPage(props) {
             </List>
             <Divider />
             <List>
-                {['Category 1', 'Category 2', 'Category 3', 'Category 4',].map((text, index) => (
-                    <ListItem button key={text}>
+                {["Storybook", "Contemporary Fiction", "Picture Book", "History"].map((text, index) => (
+                    <ListItem onClick={() => serachByCategory(text)} style={{ textDecoration: 'underline' }} button key={text}>
                         <ListItemIcon></ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
+
+
+            </List>
+            <Divider />
+
+            <Divider />
+            <List>
+                <ListItem onClick={() => sort()} button  >
+                    <ListItemIcon> </ListItemIcon>
+                    <ListItemText style={{ textDecoration: 'underline' }} primary="Sort  With Price" />
+                </ListItem>
             </List>
             <Divider />
             <AuthButton />
@@ -139,10 +179,11 @@ function DetailsPage(props) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Input style={{ background: 'white', padding: '0 20px', marginRight: '20px' }} placeholder="Keyword (s)" />
-                    <Button variant="contained" color="primary"> Search</Button>
+                    <form onSubmit={search} style={{ display: 'inherit' }}>
+                        <Input required onChange={e => { setKeyword(e.target.value) }} style={{ background: 'white', padding: '0 20px', marginRight: '20px' }} placeholder="Keyword (s)" />
+                        <Button variant="contained" type="submit" color="primary"> Search</Button>
+                    </form>
                     <div style={{ width: '100%', textAlign: 'right' }}>
-
                         <Button variant="contained" color="primary"> <AddShoppingCartIcon />  ( 0 )  </Button>
                     </div>
                 </Toolbar>
@@ -180,13 +221,17 @@ function DetailsPage(props) {
             </nav>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <BookDetailsCard />
+                <h3 className="text-info" style={{ textDecoration: 'underline' }}>Book Details Page</h3>
+                <hr />
+                <div className="row">
+
+                </div>
             </main>
         </div>
     );
 }
 
-DetailsPage.propTypes = {
+Dashboard.propTypes = {
     /**
      * Injected by the documentation to work in an iframe.
      * You won't need it on your project.
@@ -194,4 +239,4 @@ DetailsPage.propTypes = {
     window: PropTypes.func,
 };
 
-export default DetailsPage;
+export default Dashboard;

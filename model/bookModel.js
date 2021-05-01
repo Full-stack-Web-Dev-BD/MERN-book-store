@@ -46,6 +46,7 @@ const bookSchema = new Schema({
 })
 
 
+bookSchema.index({ '$**': 'text' })
 
 const bookModel = mongoose.model('bookModel', bookSchema)
 module.exports = bookModel

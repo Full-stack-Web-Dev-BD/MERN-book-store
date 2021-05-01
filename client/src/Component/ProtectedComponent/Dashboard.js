@@ -22,7 +22,15 @@ import AuthButton from './AuthButton';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import BookCard from './BookCard';
 import Axios from 'axios';
+
+
+
+// Page name  Dashboard/Home
+
+
 const drawerWidth = 240;
+
+
 
 
 
@@ -71,20 +79,43 @@ function Dashboard(props) {
     const theme = useTheme();
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [allBook, setAllBook] = useState([])
+    const [keyword, setKeyword] = useState('')
+    const [textTitle, setTextTitle] = useState('Home')
 
+
+    const serachByCategory = (catText) => {
+        Axios.post('/searchcategory', { category: catText })
+            .then(res => {
+                setAllBook(res.data)
+                setTextTitle(`Search Result for " ${catText} "`)
+
+            })
+    }
 
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
+    const sort = () => {
+        const sorted = allBook.sort((a, b) => parseFloat(b.Price) - parseFloat(a.Price));
+        setAllBook(sorted)
+        setTextTitle(`Sorted By Price `)
+
+    }
     useEffect(() => {
-        Axios.get('http://localhost:5000/getallbook')
+        Axios.get('/getallbook')
             .then(res => {
-                console.log('all data ', res.data)
                 setAllBook(res.data)
             })
     }, [])
-
+    const search = (e) => {
+        e.preventDefault()
+        Axios.post('/search', { text: keyword })
+            .then(res => {
+                setTextTitle(`Search Result for " ${keyword} "`)
+                setAllBook(res.data)
+            })
+    }
     // Sidebar
     const drawer = (
         <div>
@@ -102,12 +133,23 @@ function Dashboard(props) {
             </List>
             <Divider />
             <List>
-                {['Category 1', 'Category 2', 'Category 3', 'Category 4',].map((text, index) => (
-                    <ListItem button key={text}>
+                {["Storybook", "Contemporary Fiction", "Picture Book", "History"].map((text, index) => (
+                    <ListItem onClick={() => serachByCategory(text)} style={{ textDecoration: 'underline' }} button key={text}>
                         <ListItemIcon></ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
+
+
+            </List>
+            <Divider />
+
+            <Divider />
+            <List>
+                <ListItem onClick={() => sort()} button  >
+                    <ListItemIcon> </ListItemIcon>
+                    <ListItemText style={{ textDecoration: 'underline' }} primary="Sort  With Price" />
+                </ListItem>
             </List>
             <Divider />
             <AuthButton />
@@ -138,10 +180,11 @@ function Dashboard(props) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <Input style={{ background: 'white', padding: '0 20px', marginRight: '20px' }} placeholder="Keyword (s)" />
-                    <Button variant="contained" color="primary"> Search</Button>
+                    <form onSubmit={search} style={{ display: 'inherit' }}>
+                        <Input required onChange={e => { setKeyword(e.target.value) }} style={{ background: 'white', padding: '0 20px', marginRight: '20px' }} placeholder="Keyword (s)" />
+                        <Button variant="contained" type="submit" color="primary"> Search</Button>
+                    </form>
                     <div style={{ width: '100%', textAlign: 'right' }}>
-
                         <Button variant="contained" color="primary"> <AddShoppingCartIcon />  ( 0 )  </Button>
                     </div>
                 </Toolbar>
@@ -179,15 +222,24 @@ function Dashboard(props) {
             </nav>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
+                <h3 className="text-info" style={{ textDecoration: 'underline' }}>{textTitle}</h3>
+                <hr />
                 <div className="row">
+
                     {
                         allBook.map(el => {
                             return (
                                 <div className="col-xs-12 col-sm-6  col-md-4 mb-5">
-                                    <BookCard book={el} />
+                                    <a href={`/details?id=${el._id}&id=${el._id}`}>
+                                        <BookCard book={el} />
+                                    </a>
                                 </div>
                             )
                         })
+                    }
+                    {
+                        allBook.length < 1 ?
+                            <h1 className="pt-5 pt-5  text-warning text-center ">Not found</h1> : ''
                     }
                 </div>
             </main>

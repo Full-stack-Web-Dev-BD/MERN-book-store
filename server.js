@@ -39,9 +39,9 @@ if (true) {
     });
 
 }
-
+const mongoURI = 'mongodb+srv://user:user@mern.a77ou.mongodb.net/akh-analytic?retryWrites=true&w=majority'
 app.listen(PORT, () => {
-    mongoos.connect('mongodb://localhost/day-app', { useFindAndModify: false, useUnifiedTopology: true, useNewUrlParser: true }, (err => {
+    mongoos.connect(mongoURI, { useFindAndModify: false, useUnifiedTopology: true, useNewUrlParser: true }, (err => {
         if (err) {
             console.log(err)
             return
