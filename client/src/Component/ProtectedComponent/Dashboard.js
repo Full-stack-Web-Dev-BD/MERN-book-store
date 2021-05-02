@@ -17,7 +17,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import CategoryIcon from '@material-ui/icons/Category';
-import { Button, Input } from '@material-ui/core';
+import { Button, Card, CardActionArea, CardContent, Input } from '@material-ui/core';
 import AuthButton from './AuthButton';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import BookCard from './BookCard';
@@ -81,14 +81,15 @@ function Dashboard(props) {
     const [allBook, setAllBook] = useState([])
     const [keyword, setKeyword] = useState('')
     const [textTitle, setTextTitle] = useState('Home')
-
+    const [isDetails, setIsDetails] = useState(false)
+    const [book, setBook] = useState({})
 
     const serachByCategory = (catText) => {
         Axios.post('/searchcategory', { category: catText })
             .then(res => {
                 setAllBook(res.data)
                 setTextTitle(`Search Result for " ${catText} "`)
-
+                setIsDetails(false)
             })
     }
 
@@ -100,7 +101,7 @@ function Dashboard(props) {
         const sorted = allBook.sort((a, b) => parseFloat(b.Price) - parseFloat(a.Price));
         setAllBook(sorted)
         setTextTitle(`Sorted By Price `)
-
+        setIsDetails(false)
     }
     useEffect(() => {
         Axios.get('/getallbook')
@@ -115,6 +116,10 @@ function Dashboard(props) {
                 setTextTitle(`Search Result for " ${keyword} "`)
                 setAllBook(res.data)
             })
+    }
+    const bookSetter = (el) => {
+        setBook(el)
+        setIsDetails(true)
     }
     // Sidebar
     const drawer = (
@@ -222,26 +227,60 @@ function Dashboard(props) {
             </nav>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <h3 className="text-info" style={{ textDecoration: 'underline' }}>{textTitle}</h3>
-                <hr />
-                <div className="row">
+                {
+                    isDetails ?
+                        <div>
+                            <h3 className="text-info" style={{ textDecoration: 'underline' }}> <a href="/home">Home</a> > {book.BookName}</h3>
+                            <div className="col-md-6 offset-md-3">
+                                <form onSubmit={search} style={{ display: 'inherit' }} className="mb-5">
+                                    <Input type='number' required onChange={e => { setKeyword(e.target.value) }} style={{ background: 'white', padding: '0 20px', marginRight: '20px' }} placeholder="Order" />
+                                    <Button variant="contained" type="submit" color="primary"> Add to Cart</Button>
+                                </form>
+                                <Card >
+                                    <CardActionArea>
+                                        <img style={{ width: '100%', height: '400px' }} src={`/Image/${book.Img}`} />
+                                        <CardContent>
+                                            <Typography gutterBottom variant="h5" component="h2">{book.BookName}</Typography>
+                                            {
+                                                book.NewArrival === "Yes" ?
+                                                    <h6 className="text-danger  "> New Arrival !!! </h6> : ''
+                                            }
+                                            <p style={{ margin: '0' }}> Author : {book.Author} </p>
+                                            <p style={{ margin: '0' }}> Published : {book.Published} </p>
+                                            <p style={{ margin: '0' }}> Publisher : {book.Publisher} </p>
+                                            <p style={{ margin: '0' }}> Category : {book.Category} </p>
+                                            <p style={{ margin: '0' }}> Language : {book.Lang} </p>
+                                            <p style={{ margin: '0' }}> Description : {book.Description} </p>
+                                            <p style={{ margin: '0' }}> Price : $ {book.Price} </p>
 
-                    {
-                        allBook.map(el => {
-                            return (
-                                <div className="col-xs-12 col-sm-6  col-md-4 mb-5">
-                                    <a href={`/details?id=${el._id}&id=${el._id}`}>
-                                        <BookCard book={el} />
-                                    </a>
-                                </div>
-                            )
-                        })
-                    }
-                    {
-                        allBook.length < 1 ?
-                            <h1 className="pt-5 pt-5  text-warning text-center ">Not found</h1> : ''
-                    }
-                </div>
+                                        </CardContent>
+                                    </CardActionArea>
+                                </Card>
+                            </div>
+                        </div>
+                        :
+                        <div>
+                            <h3 className="text-info" style={{ textDecoration: 'underline' }}>{textTitle}</h3>
+                            <hr />
+                            <div className="row">
+                                {
+                                    allBook.map(el => {
+                                        return (
+                                            <div className="col-xs-12 col-sm-6  col-md-4 mb-5">
+                                                <span onClick={() => bookSetter(el)}>
+                                                    <BookCard book={el} />
+                                                </span>
+                                            </div>
+                                        )
+                                    })
+                                }
+                                {
+                                    allBook.length < 1 ?
+                                        <h1 className="pt-5 pt-5  text-warning text-center ">Not found</h1> : ''
+                                }
+                            </div>
+                        </div>
+                }
             </main>
         </div>
     );

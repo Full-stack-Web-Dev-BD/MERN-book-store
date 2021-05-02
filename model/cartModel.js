@@ -2,9 +2,10 @@ const mongoose=require('mongoose')
 const Schema=mongoose.Schema
 
 const cartSchema=new Schema({
-    name:String,
-    email:String,
-    password:String,
+    CartID:Schema.Types.ObjectId,
+    BookID:Array,
+    UserID:Schema.Types.ObjectId,
+    Quantity:Number
 })
 
 

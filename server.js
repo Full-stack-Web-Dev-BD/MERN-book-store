@@ -37,9 +37,9 @@ if (true) {
     app.get("*", (req, res) => {
         res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
     });
-
 }
-const mongoURI = 'mongodb+srv://user:user@mern.a77ou.mongodb.net/akh-analytic?retryWrites=true&w=majority'
+// const mongoURI = 'mongodb+srv://user:user@mern.a77ou.mongodb.net/akh-analytic?retryWrites=true&w=majority'
+const mongoURI = 'mongodb://localhost/booklist'
 app.listen(PORT, () => {
     mongoos.connect(mongoURI, { useFindAndModify: false, useUnifiedTopology: true, useNewUrlParser: true }, (err => {
         if (err) {

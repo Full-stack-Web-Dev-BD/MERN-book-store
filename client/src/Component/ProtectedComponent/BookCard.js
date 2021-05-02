@@ -20,22 +20,20 @@ const useStyles = makeStyles({
 export default function BookCard({ book }) {
     const classes = useStyles();
     return (
-        <a href={`/details?id=${book._id}&id=${book._id}`}>
-            <Card style={{ height: '100%' }} className={classes.root}>
-                <CardActionArea>
-                    <img style={{ width: '100%', height: '400px' }} src={`/Image/${book.Img}`} />
-                    <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">{book.BookName}</Typography>
-                        {
-                            book.NewArrival === "Yes" ?
-                                <h6 className="text-danger  "> New Arrival !!! </h6> : ''
-                        }
-                        <p style={{ margin: '0' }}> Author : {book.Author} </p>
-                        <p style={{ margin: '0' }}> Publisher : {book.Publisher} </p>
-                        <p style={{ margin: '0' }}> Price : $ {book.Price} </p>
-                    </CardContent>
-                </CardActionArea>
-            </Card>
-        </a>
+        <Card style={{ height: '100%' }} className={classes.root}>
+            <CardActionArea>
+                <img style={{ width: '100%', height: '400px' }} src={`/Image/${book.Img}`} />
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="h2">{book.BookName}</Typography>
+                    {
+                        book.NewArrival === "Yes" ?
+                            <h6 className="text-danger  "> New Arrival !!! </h6> : ''
+                    }
+                    <p style={{ margin: '0' }}> Author : {book.Author} </p>
+                    <p style={{ margin: '0' }}> Publisher : {book.Publisher} </p>
+                    <p style={{ margin: '0' }}> Price : $ {book.Price} </p>
+                </CardContent>
+            </CardActionArea>
+        </Card>
     );
 }
