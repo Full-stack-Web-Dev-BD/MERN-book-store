@@ -3,7 +3,7 @@ const Schema=mongoose.Schema
 
 const cartSchema=new Schema({
     CartID:Schema.Types.ObjectId,
-    BookID:Array,
+    BookInfo:Array,
     UserID:Schema.Types.ObjectId,
     Quantity:Number
 })

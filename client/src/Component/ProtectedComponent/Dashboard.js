@@ -22,18 +22,14 @@ import AuthButton from './AuthButton';
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import BookCard from './BookCard';
 import Axios from 'axios';
+import {reactLocalStorage} from 'reactjs-localstorage';
 
 
 
 // Page name  Dashboard/Home
 
 
-const drawerWidth = 240;
-
-
-
-
-
+const drawerWidth = 240; 
 const logout = () => {
     window.localStorage.removeItem('st_app')
     window.location.reload()
@@ -73,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function Dashboard(props) {
+const  Dashboard=(props)=> {
     const { window } = props;
     const classes = useStyles();
     const theme = useTheme();
@@ -83,6 +79,28 @@ function Dashboard(props) {
     const [textTitle, setTextTitle] = useState('Home')
     const [isDetails, setIsDetails] = useState(false)
     const [book, setBook] = useState({})
+    const [cartProduct, setCartProduct] = useState([])
+    const [orderQ, setOrderQ] = useState()
+    const [tq, setTq] = useState(0)
+    useEffect(() => {
+        setCartProduct(reactLocalStorage.getObject('cart'))
+        
+        let  cp= reactLocalStorage.getObject('cart').cart
+        if(cp){
+            let x=0
+            cp.map(el=>{
+                x=parseInt(x)+ parseInt(el.qt)
+                setTq(x)
+            })
+        }else{
+            return console.log('done')
+        }
+        
+        Axios.get('/getallbook')
+            .then(res => {
+                setAllBook(res.data)
+            })
+    }, [])
 
     const serachByCategory = (catText) => {
         Axios.post('/searchcategory', { category: catText })
@@ -92,8 +110,6 @@ function Dashboard(props) {
                 setIsDetails(false)
             })
     }
-
-
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
@@ -103,12 +119,6 @@ function Dashboard(props) {
         setTextTitle(`Sorted By Price `)
         setIsDetails(false)
     }
-    useEffect(() => {
-        Axios.get('/getallbook')
-            .then(res => {
-                setAllBook(res.data)
-            })
-    }, [])
     const search = (e) => {
         e.preventDefault()
         Axios.post('/search', { text: keyword })
@@ -120,6 +130,17 @@ function Dashboard(props) {
     const bookSetter = (el) => {
         setBook(el)
         setIsDetails(true)
+    }
+
+    const addToCart=()=>{
+        book.qt=orderQ
+        let ex=reactLocalStorage.getObject('cart')
+        if (!ex.cart){
+           return reactLocalStorage.setObject('cart',{cart:[book]})
+        }else{
+            let allCB=[...ex.cart,book]
+           return reactLocalStorage.setObject('cart',{cart:allCB})
+        }
     }
     // Sidebar
     const drawer = (
@@ -190,7 +211,9 @@ function Dashboard(props) {
                         <Button variant="contained" type="submit" color="primary"> Search</Button>
                     </form>
                     <div style={{ width: '100%', textAlign: 'right' }}>
-                        <Button variant="contained" color="primary"> <AddShoppingCartIcon />  ( 0 )  </Button>
+                        <a href="/cart">
+                            <Button variant="contained" color="primary"> <AddShoppingCartIcon />  ( {tq} )  </Button>
+                        </a>
                     </div>
                 </Toolbar>
             </AppBar>
@@ -232,9 +255,9 @@ function Dashboard(props) {
                         <div>
                             <h3 className="text-info" style={{ textDecoration: 'underline' }}> <a href="/home">Home</a> > {book.BookName}</h3>
                             <div className="col-md-6 offset-md-3">
-                                <form onSubmit={search} style={{ display: 'inherit' }} className="mb-5">
-                                    <Input type='number' required onChange={e => { setKeyword(e.target.value) }} style={{ background: 'white', padding: '0 20px', marginRight: '20px' }} placeholder="Order" />
-                                    <Button variant="contained" type="submit" color="primary"> Add to Cart</Button>
+                                <form onSubmit={()=>addToCart()} style={{ display: 'inherit' }} className="mb-5">
+                                    <Input  type='number' required onChange={e => { setOrderQ(e.target.value) }} style={{ background: 'white', padding: '0 20px', marginRight: '20px' }} placeholder="Order 0" />
+                                    <Button variant="contained" type="submit" color="primary"    > Add to Cart</Button>
                                 </form>
                                 <Card >
                                     <CardActionArea>
