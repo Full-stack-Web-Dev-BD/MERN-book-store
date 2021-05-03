@@ -1,5 +1,9 @@
 const BookModel = require('../model/bookModel')
 const bookRouter = require('express').Router()
+const checkoutModel= require('../model/Checkout')
+
+
+
 
 bookRouter.get('/getallbook', (req, res) => {
     BookModel.find((err, doc) => {
@@ -10,9 +14,6 @@ bookRouter.get('/getallbook', (req, res) => {
         res.json(doc)
     })
 })
-
-
-
 bookRouter.post('/search', (req, res) => {
     const text = req.body.text
     const splited = text.split(/[ ,]+/);
@@ -47,10 +48,20 @@ bookRouter.get('/getsingle/:id', (req, res) => {
             return res.json({ err })
         })
 })
-
 bookRouter.post('/searchcategory', (req, res) => {
     console.log(req.body)
     BookModel.find({ Category: req.body.category })
+        .then(doc => {
+            console.log(doc)
+            res.json(doc)
+        })
+        .catch(err => {
+            return res.json({ message: 'error' })
+        })
+})
+bookRouter.post('/checkout', (req, res) => {
+    new checkoutModel(req.body)
+        .save()
         .then(doc => {
             console.log(doc)
             res.json(doc)

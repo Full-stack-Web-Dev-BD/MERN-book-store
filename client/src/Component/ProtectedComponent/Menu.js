@@ -79,7 +79,7 @@ export default function MenuListComposition() {
                 <ClickAwayListener onClickAway={handleClose}>
                   <MenuList autoFocusItem={open} id="menu-list-grow" onKeyDown={handleListKeyDown}>
                     <MenuItem onClick={handleClose}>
-                        <Link to='/home'>Home</Link>
+                        <Link to='/'>Home</Link>
                     </MenuItem>
                       <MenuItem onClick={handleClose}>
                         <Link to='/create-post'>Create Post</Link>

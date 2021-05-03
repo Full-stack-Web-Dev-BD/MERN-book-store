@@ -15,11 +15,11 @@ const Login = () => {
 
     const onSubmit = () => {
         let obj = { email, password }
-        Axios.post(':5000/login', obj)
+        Axios.post('/login', obj)
             .then(res => {
                 console.log(res.data)
                 window.localStorage.setItem('st_app', res.data.token)
-                window.location.href = '/home'
+                window.location.href = '/'
 
             })
             .catch(err => {

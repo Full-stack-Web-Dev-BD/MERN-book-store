@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom'
 const Home = () => {
     const [posts, setposts] = useState([])
     useEffect(() => {
-        Axios.get(':5000/posts')
+        Axios.get('/posts')
             .then(res => {
                 setposts(res.data)
             })
@@ -21,7 +21,7 @@ const Home = () => {
     const deletePost = (id) => {
         console.log(id)
         Axios.get(`:5000/delete-post/${id}`)
-            .then(res => window.location.href = '/home')
+            .then(res => window.location.href = '/')
             .catch(err => { console.log(err) })
     }
     return (

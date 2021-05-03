@@ -23,7 +23,7 @@ import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import BookCard from './BookCard';
 import Axios from 'axios';
 
-// Page name  Dashboard/Home
+// Page name  Dashboard/
 
 
 const drawerWidth = 240;
@@ -82,7 +82,7 @@ function Dashboard(props) {
 
 
     const serachByCategory = (catText) => {
-        Axios.post(':5000/searchcategory', { category: catText })
+        Axios.post('/searchcategory', { category: catText })
             .then(res => {
                 setAllBook(res.data)
                 setTextTitle(`Search Result for " ${catText} "`)
@@ -102,14 +102,14 @@ function Dashboard(props) {
     useEffect(() => {
         // const hr=qs.parse(window.location.href)
 
-        // Axios.get(':5000/getsingle/')
+        // Axios.get(/getsingle/')
         //     .then(res => {
         //         console.log(res.data)
         //     })
     }, [])
     const search = (e) => {
         e.preventDefault()
-        Axios.post(':5000/search', { text: keyword })
+        Axios.post('/search', { text: keyword })
             .then(res => {
                 setTextTitle(`Search Result for " ${keyword} "`)
                 setAllBook(res.data)

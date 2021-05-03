@@ -36,7 +36,7 @@ const EditPost = () => {
             .then(res => {
 
                 console.log(res.data)
-                window.location.href = '/home'
+                window.location.href = '/'
             })
             .catch(err => {
                 console.log(err.response.data)
@@ -81,7 +81,7 @@ const EditPost = () => {
                         </form>
                         <Button onClick={onSubmit} variant="contained" color="secondary" className="mt-5 mb-3 mr-5">Update</Button>
 
-                        <Link to='/home'><Button variant="contained" color="danger" className="mt-5 mb-3">Cancel</Button></Link>
+                        <Link to='/'><Button variant="contained" color="danger" className="mt-5 mb-3">Cancel</Button></Link>
                     </CardContent>
                 </Card>
             </div>

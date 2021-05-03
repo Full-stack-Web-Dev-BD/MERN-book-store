@@ -3,7 +3,6 @@ import { BrowserRouter, Switch, Redirect, Route } from 'react-router-dom';
 
 import PublicRoute from './Component/util/PublicRoute'
 import ProtectedRoute from './Component/util/ProtectedRoute'
-import CreatePost from './Component/ProtectedComponent/CreatePost'
 
 import Login from './Component/PublicComponent/Login'
 import Register from './Component/PublicComponent/Register'
@@ -21,9 +20,9 @@ function App() {
                     <PublicRoute path='/login' component={Login} />
                     <PublicRoute path='/register' component={Register} />
                     <Route path="/cart" component={CartPage} />
-                    <Route path="/checkout" component={CheckoutPage} />
+                    <ProtectedRoute path="/checkout" component={CheckoutPage} />
                     <Route path="/" component={Dashboard} />
-                    {/* <Redirect from="/" to="/home" /> */}
+                    {/* <Redirect from="/" to="/" /> */}
                 </Switch>
             </BrowserRouter> 
     )

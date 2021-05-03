@@ -26,7 +26,7 @@ import {reactLocalStorage} from 'reactjs-localstorage';
 
 
 
-// Page name  Dashboard/Home
+// Page name  Dashboard/
 
 
 const drawerWidth = 240; 
@@ -82,6 +82,9 @@ const  Dashboard=(props)=> {
     const [cartProduct, setCartProduct] = useState([])
     const [orderQ, setOrderQ] = useState()
     const [tq, setTq] = useState(0)
+
+    
+    
     useEffect(() => {
         setCartProduct(reactLocalStorage.getObject('cart'))
         
@@ -93,12 +96,13 @@ const  Dashboard=(props)=> {
                 setTq(x)
             })
         }else{
-            return console.log('done')
+             console.log('done')
         }
         
         Axios.get('/getallbook')
             .then(res => {
                 setAllBook(res.data)
+                console.log('data',res.data)
             })
     }, [])
 
@@ -253,7 +257,7 @@ const  Dashboard=(props)=> {
                 {
                     isDetails ?
                         <div>
-                            <h3 className="text-info" style={{ textDecoration: 'underline' }}> <a href="/home">Home</a> > {book.BookName}</h3>
+                            <h3 className="text-info" style={{ textDecoration: 'underline' }}> <a href="/">Home</a> > {book.BookName}</h3>
                             <div className="col-md-6 offset-md-3">
                                 <form onSubmit={()=>addToCart()} style={{ display: 'inherit' }} className="mb-5">
                                     <Input  type='number' required onChange={e => { setOrderQ(e.target.value) }} style={{ background: 'white', padding: '0 20px', marginRight: '20px' }} placeholder="Order 0" />

@@ -14,10 +14,10 @@ const CreatePost = () => {
 
     const onSubmit = () => {
         let obj = { title, summary, author }
-        Axios.post(':5000/create-post', obj)
+        Axios.post('/create-post', obj)
             .then(res => {
                 console.log(res.data)
-                window.location.href = '/home'
+                window.location.href = '/'
             })
             .catch(err => {
                 console.log(err.response.data)

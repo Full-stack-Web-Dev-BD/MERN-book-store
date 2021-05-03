@@ -23,7 +23,7 @@ const Register = () => {
     const onSubmit = () => {
         console.log(name, email, password, confirmPassword)
         let obj = { name, email, password, confirmPassword }
-        Axios.post(':5000/register', obj)
+        Axios.post('/register', obj)
             .then(res => {
                 console.log(res.data.massage)
                 setsuccessMassage(res.data.massage)
@@ -47,21 +47,21 @@ const Register = () => {
                         <form >
                             <div className="row">
                                 <div className="col-12 mb-3">
-                                    <TextField style={{ width: '100%' }} type="email" onChange={(e) => { setEmail(e.target.value) }} error={errors.email} className="from-control" id="standard-basic" label="Desired Username" />
+                                    <TextField required  style={{ width: '100%' }} type="email" onChange={(e) => { setEmail(e.target.value) }} error={errors.email} className="from-control" id="standard-basic" label="Desired Username" />
                                     {
                                         errors.email ?
                                             <p className="text-danger"> {errors.email} </p> : ''
                                     }
                                 </div>
                                 <div className="col-12 mb-3">
-                                    <TextField style={{ width: '100%' }} type="password" onChange={(e) => { setPassword(e.target.value) }} error={errors.password} className="from-control" id="standard-basic" label="Desired Password" />
+                                    <TextField required style={{ width: '100%' }} type="password" onChange={(e) => { setPassword(e.target.value) }} error={errors.password} className="from-control" id="standard-basic" label="Desired Password" />
                                     {
                                         errors.password ?
                                             <p className="text-danger"> {errors.password} </p> : ''
                                     }
                                 </div>
                                 <div className="col-12 mb-3">
-                                    <TextField style={{ width: '100%' }} type="password" onChange={(e) => { setConfirmPassword(e.target.value) }} error={errors.confirmPassword} className="from-control" id="standard-basic" label="Confirm Password" />
+                                    <TextField required style={{ width: '100%' }} type="password" onChange={(e) => { setConfirmPassword(e.target.value) }} error={errors.confirmPassword} className="from-control" id="standard-basic" label="Confirm Password" />
                                     {
                                         errors.confirmPassword ?
                                             <p className="text-danger"> {errors.confirmPassword} </p> : ''
